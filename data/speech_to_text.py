@@ -30,7 +30,6 @@ from __future__ import division
 
 import re
 import sys
-from threading import Thread
 import time
 
 from multiprocessing import Process
@@ -60,8 +59,55 @@ asound.snd_lib_error_set_handler(c_error_handler)
 ###############################
 
 # Audio recording parameters
-RATE = 16000 # 기존 16000 에서 "OSError: [Errno -9997] Invalid sample rate" 발생
+RATE = 44100 # 기존 16000 에서 "OSError: [Errno -9997] Invalid sample rate" 발생
 CHUNK = int(RATE / 10)  # 100ms
+
+
+import time
+
+from openpibo.device import Device
+d = Device()
+
+touch_count = 0     # 밖으로 빼야 함수 부를 때마다 초기화 안 됨
+
+def touch():
+    """
+    터치 2번으로 발생시켜서 stt 탈출하는 기능
+
+    Raises:
+        Exception: stt 탈출!
+    """
+    # print("tt")
+    # timelimit = time.time() + timeout    
+    global touch_count
+    
+    # while time.time() < timelimit:
+    #     data = d.send_cmd(d.code_list['SYSTEM']).split(':')[1].split('-')
+    #     result = data[1] if data[1] else "No signal"
+        
+    #     if result == "touch":
+    #         touch_count += 1
+    #         print("touch:", touch_count)
+            
+    #         if touch_count % 2 == 0:
+    #             d.eye_on(255,245,80)
+    #             raise Exception("탈출") 
+        
+    #     else:
+    #         continue
+    data = d.send_cmd(d.code_list['SYSTEM']).split(':')[1].split('-')
+    result = data[1] if data[1] else "No signal"
+    
+    if result == "touch":
+        touch_count += 1
+        print("touch:", touch_count)
+        
+        if touch_count % 2 == 0:
+            d.eye_on(255,245,80)
+            raise Exception("탈출") 
+
+    return touch_count
+
 
 
 class MicrophoneStream(object):
@@ -130,36 +176,8 @@ class MicrophoneStream(object):
             yield b''.join(data)
 
 
-from openpibo.device import Device
-d = Device()
-
-def button():
-    """
-    터치 2번으로 발생시켜서 stt 탈출하는 기능
-
-    Raises:
-        Exception: stt 탈출!
-    """
-    timelimit = time.time() + 10
-    touch_count = 0
-    
-    while time.time() < timelimit:
-        data = d.send_cmd(d.code_list['SYSTEM']).split(':')[1].split('-')
-        result = data[1] if data[1] else "No signal"
-        
-        if result == "touch":
-            touch_count += 1
-            print("touch:", touch_count)
-            
-            if touch_count % 2 == 0:
-                d.eye_on(255,245,80)
-                raise Exception("탈출") 
-        
-        else:
-            continue
-
-
 def listen_print_loop(responses):
+    global touch_count
     text = ''
     num_chars_printed = 0
     for response in responses:
@@ -173,12 +191,21 @@ def listen_print_loop(responses):
 
         transcript = result.alternatives[0].transcript
         overwrite_chars = ' ' * (num_chars_printed - len(transcript))
-
+        
+        
+        
         if not result.is_final:
             # sys.stdout.write(transcript + overwrite_chars + '\r')
             # sys.stdout.flush()
-            print('답변: ' + transcript + overwrite_chars, end='\r')
-            num_chars_printed = len(transcript)
+            try:
+                touch()     # 뭔가 말 하면서 터치해야 함
+                print('답변: ' + transcript + overwrite_chars, end='\r')
+                num_chars_printed = len(transcript)
+                                
+            except Exception as e:
+                text = "next"
+                touch_count = 2
+                break
 
         else:
             text = transcript + overwrite_chars
@@ -188,11 +215,10 @@ def listen_print_loop(responses):
                 break
             num_chars_printed = 0    
             
-    return text
+    return text, touch_count
 
 
-def speech_to_text(timeout=5):
-
+def speech_to_text(timeout=10):
     # See http://g.co/cloud/speech/docs/languages
     # for a list of supported languages.
     language_code = 'ko-KR'  # a BCP-47 language tag
@@ -215,31 +241,15 @@ def speech_to_text(timeout=5):
                     for content in audio_generator)
 
         responses = client.streaming_recognize(streaming_config, requests, timeout=timeout)
+        
         # Now, put the transcription responses to use.
         stt_out = listen_print_loop(responses)
-        print('답변:', stt_out)
-            
-        # t1 = Thread(target=button, args=(), daemon=False)
-        # t1.start()
-        # try:            
-        #     responses = client.streaming_recognize(streaming_config, requests, timeout=timeout)
-        
-        #     # Now, put the transcription responses to use.
-        #     stt_out = listen_print_loop(responses)
-        #     print('답변:', stt_out)
-        
-        # except Exception as e:    # 여기서 다 컷 해버리는 문제. 구체적인 exception 정해야할듯
-        #     stt_out = "next"
-        #     print(e)
-            
+        print('답변:', stt_out[0])
     
         # print('\n')
     return stt_out
-    
 
 if __name__ == '__main__':
-    
-    rr = speech_to_text()
-    print(rr)
+    speech_to_text()
         
 # [END speech_transcribe_streaming_mic]

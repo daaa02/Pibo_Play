@@ -35,7 +35,7 @@ crc = csv.reader(csv_conversation, delimiter=',', doublequote=True, lineterminat
 class Soc():
     
     def __init__(self): 
-        self.user_name = '찬익'
+        self.user_name = '호수'
         self.body = ['발바닥', '배', '팔', '다리', '팔꿈치', '무릎', '허벅지']
         self.score = []
         self.turns = []
@@ -48,10 +48,11 @@ class Soc():
         
     def soc_6(self):
         
-        pibo = cm.tts(bhv="do_suggestion_S", string=f"몸으로 악기를 연주하는 놀이를 해보자!")
+        pibo = cm.tts(bhv="do_suggestion_S", string=f"털실 놀이를 해보자!")
         
         time.sleep(1)
         pibo = cm.tts(bhv="do_explain_A", string=f"이번 놀이는 준비물이 필요없어. 놀이 방법을 알려줄께!") 
+        time.sleep(1)
         pibo = cm.tts(bhv="do_joy_A", string=f"파이보가 신체 부위 한 곳을 말할거야. 그러면 그 신체 부위를 악기처럼 두드리면서 소리를 내면 돼. 할 수 있지? 할 수 있으면 할 수 있다고 말해줘~")
         cwc.writerow(['pibo', pibo])
         
@@ -60,11 +61,9 @@ class Soc():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_explain_B", string=f"파이보가 음악을 틀어줄게. 음악 속도에 맞춰서 신체를 두드려보자. 준비 됐으면 시작하자고 말해줘.")
                 cwc.writerow(['pibo', pibo])
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue
@@ -74,7 +73,7 @@ class Soc():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
 
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_joy_B", string=f"그래애! 시작하자!")
                 time.sleep(1)
                 
@@ -94,8 +93,6 @@ class Soc():
                 audio.audio_play(filename="/home/pi/Pibo_Play/data/behavior/audio/sound_body.mp3", volume=-1500)
                 
                 pibo = cm.tts(bhv="do_compliment_L", string=f"우리 몸에서 나는 소리가 정말 악기 소리같아! 정말 신나는 신체 악기 연주였어!")
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue

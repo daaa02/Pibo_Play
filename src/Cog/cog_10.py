@@ -32,7 +32,7 @@ crc = csv.reader(csv_conversation, delimiter=',', doublequote=True, lineterminat
 class Cog():   
     
     def __init__(self): 
-        self.user_name = '찬익'
+        self.user_name = '호수'
         self.score = []
         self.turns = []
         self.reject = []
@@ -44,20 +44,20 @@ class Cog():
     
     def cog_10(self):
         pibo = cm.tts(bhv="do_suggestion_S", string=f"강 건너기 놀이를 해보자!")
-        
+        time.sleep(1)
         pibo = cm.tts(bhv="do_explain_A", string=f"이번 놀이는 책이 필요해! 징검다리를 만들 수 있게 5개 보다 많이 준비하면 돼! 준비가 되면 준비 됐다고 말해줘.")
         
         while True:
             answer = cm.responses_proc(re_bhv="do_waiting_A", re_q=f"준비가 되면 준비 됐다고 말해줘~")
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_joy_A", string=f"좋았어. 놀이 방법을 알려줄께!")
                 time.sleep(1)                
                 pibo = cm.tts(bhv="do_explain_B", string=f"바닥에 책을 하나씩 놓으면서 징검다리를 만들고 하나씩 밟고 강을 건너 볼거야. 할 수 있지? 할 수 있으면 할 수 있다고 말해줘~ ")
                 cwc.writerow(['pibo', pibo])
                 break
             
-            if answer[0][0] == "no" or answer[0][0] == "next":
+            if answer[0][0] == "no":
                 pibo = cm.tts(bhv="do_suggestion_S", string=f"그럼 다른 놀이 하자! {wm.word(self.user_name, 0)}가 다시 내 머리를 쓰다듬어주면 돼!")
                 self.score = [0.0, 0.0, 0.0, -0.25]
                 cwp.writerow([today, filename, self.score[0], self.score[1], self.score[2],self.score[3]])       
@@ -71,12 +71,10 @@ class Cog():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_explain_A", string=f"좋았어! 강을 건널 때는 넘어지지 않게 조심해야 해. 준비가 됐으면 시작하자고 말해줘.") 
                 time.sleep(1)
                 cwc.writerow(['pibo', pibo])
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue
@@ -86,13 +84,11 @@ class Cog():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_explain_A", string=f"그래애 시작하자! 책을 뿌려서 징검다리를 만들어 봐.")
                 time.sleep(1)
                 pibo = cm.tts(bhv="do_suggestion_S", string=f"일자로 뿌려 놓으면 건너기가 쉬울거야. 다 했으면 다 했어 라고 말해줘.")
                 cwc.writerow(['pibo', pibo])
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue
@@ -102,12 +98,10 @@ class Cog():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_explain_A", string=f"이제 징검다리를 하나씩 건너뛰면서 균형을 잡아보자. ")
                 answer = cm.responses_proc(re_bhv="do_explain_A", re_q=f"다 세면 몇 개인지 말해줘. 하나씩 뛸 때마다 숫자를 세보는 거야. 도착하면 도착했어 라고 알려줘.")
                 cwc.writerow(['pibo', pibo])
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue
@@ -118,7 +112,7 @@ class Cog():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_compliment_L", string=f"집중력이 정말 대단한걸? 징검다리 돌이 몇 개 였어?")
                 answer = cm.responses_proc(re_bhv="do_explain_A", re_q=f"돌이 몇 개 였어?")
                 cwc.writerow(['pibo', pibo]) 
@@ -129,8 +123,6 @@ class Cog():
                 time.sleep(1)
                 pibo = cm.tts(bhv="do_suggestion_L", string=f"이제 뒤로 돌아서 다시 징검다리를 건너보자. 이번엔 하나씩 뛸 때마다 거꾸로 숫자를 세어보는 거야. 도착하면 도착했어 라고 알려줘.")
                 break
-            if answer[0][0] == "next":
-                break
             else:
                 continue
             
@@ -140,10 +132,8 @@ class Cog():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_compliment_L", string=f"와아, 정말 잘 했어. {wm.word(self.user_name, 0)}는 숫자도 잘 세고 균형도 잘 잡는 것 같아. 파이보도 똑똑해진 것 같아!")
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue

@@ -35,7 +35,7 @@ crc = csv.reader(csv_conversation, delimiter=',', doublequote=True, lineterminat
 class Com():
     
     def __init__(self): 
-        self.user_name = '찬익'
+        self.user_name = '호수'
         self.score = []
         self.turns = []
         self.reject = []
@@ -50,8 +50,9 @@ class Com():
         pibo = cm.tts(bhv="do_suggestion_S", string=f"춤추는 유령 놀이를 해보자!")
         time.sleep(1)        
         pibo = cm.tts(bhv="do_explain_A", string=f"이번 놀이는 준비물이 필요없어! 놀이 방법을 알려줄께!")
-
+        time.sleep(1)
         pibo = cm.tts(bhv="do_suggestion_S", string=f"음악이 나오면 주문을 외치고 마음껏 춤을 추면 돼. 주문을 따라해보자!")
+        time.sleep(1)
         pibo = cm.tts(bhv="do_joy_A", string=f"‘우리는 춤을 추는 유령이에요’. 한번 따라해 보자!")
         cwc.writerow(['pibo', pibo])
         
@@ -60,7 +61,7 @@ class Com():
             
             pibo = cm.tts(bhv="do_explain_B", string=f"좋았어! 만약에 음악이 멈추면 제자리에서 정지해야 돼. 그리고 다시 음악이 나올 때 다시 춤을 추면 돼.")
             cwc.writerow(['pibo', pibo])
-
+            time.sleep(1)
             pibo = cm.tts(bhv="do_waiting_A", string=f"준비가 됐으면 시작하자고 말해줘.")
             break
         
@@ -69,7 +70,7 @@ class Com():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
 
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_joy_B", string=f"그래애! 시작하자")
                 time.sleep(1)
 
@@ -106,7 +107,7 @@ class Com():
             self.reject.append(answer[1])
 
             pibo = cm.tts(bhv="do_suggestion_L", string=f"그랬구나. 그래도 {wm.word(self.user_name, 0)}가 춤을 잘 춰서 파이보는 정말 재미있었어! ")
-            
+            time.sleep(1)
             pibo = cm.tts(bhv="do_question_S", string=f"춤 추니까 기분이 어땠어? 신났어?")            
             answer = cm.responses_proc(re_bhv="do_question_S", re_q=f"춤 추니까 기분이 어땠어?")
             cwc.writerow(['pibo', pibo])

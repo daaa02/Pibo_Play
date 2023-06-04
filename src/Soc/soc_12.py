@@ -35,7 +35,7 @@ crc = csv.reader(csv_conversation, delimiter=',', doublequote=True, lineterminat
 class Soc():
     
     def __init__(self): 
-        self.user_name = '찬익'
+        self.user_name = '호수'
         self.place = ['화장실', '부엌', '현관', '큰방', '작은방']
         self.score = []
         self.turns = []
@@ -52,6 +52,7 @@ class Soc():
         
         time.sleep(1)
         pibo = cm.tts(bhv="do_explain_A", string=f"이번 놀이는 준비물이 필요없어. 놀이 방법을 알려줄께!") 
+        time.sleep(1)
         pibo = cm.tts(bhv="do_joy_A", string=f"이번 놀이에서는 파이보가 장님 역할을 할거야. 파이보가 목적지를 말하면 {wm.word(self.user_name, 0)}는 파이보를 안고 목적지에 데려다 줘.")
         cwc.writerow(['pibo', pibo])
         
@@ -60,11 +61,9 @@ class Soc():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_explain_B", string=f"목적지에 도착하면 주변에 어떤 물건들이 있는지 파이보에게 알려줘. 준비 됐으면 시작하자고 말해줘.")
                 cwc.writerow(['pibo', pibo])
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue
@@ -74,7 +73,7 @@ class Soc():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
 
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_joy_B", string=f"그래애! 시작하자!")
                 time.sleep(1)
                 
@@ -82,8 +81,6 @@ class Soc():
                 pibo = cm.tts(bhv="do_joy_A", string=f"먼저 {place}에 가보자! 도착하면 도착했어 라고 말해줘~")
                 cwc.writerow(['pibo', pibo])
                 time.sleep(7)
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue
@@ -93,7 +90,7 @@ class Soc():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
 
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_question_L", string=f" 빠르게 도착했는걸? {place}이 어떻게 생겼는지 알고 싶어. {place}에는 무슨 색깔이 있어?")
                 answer = cm.responses_proc(re_bhv="do_question_S", re_q=f"{place}에는 무슨 색깔이 있어?")
                 cwc.writerow(['pibo', pibo])
@@ -119,8 +116,6 @@ class Soc():
                 self.reject.append(answer[1])
 
                 pibo = cm.tts(bhv="do_joy_A", string=f"{wm.word(self.user_name, 0)}는 정말 설명을 잘해주는 구나! 눈이 안보여도 {place}이 어떻게 생겼는지 알 것 같아! 친절하게 알려줘서 고마워!")
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue

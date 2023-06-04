@@ -35,7 +35,7 @@ crc = csv.reader(csv_conversation, delimiter=',', doublequote=True, lineterminat
 class Mus():
     
     def __init__(self): 
-        self.user_name = '찬익'
+        self.user_name = '호수'
         self.score = []
         self.turns = []
         self.reject = []
@@ -58,7 +58,7 @@ class Mus():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_joy_A", string=f"좋았어. 놀이 방법을 알려줄께!")
                 time.sleep(1)                
                 pibo = cm.tts(bhv="do_explain_B", string=f"나무로 된 주걱이 요리사 도구야. 주걱 위에 놓인 호박을 풍선이라 생각하고 떨어트리지 않고 운반하는 거야. ")
@@ -66,7 +66,7 @@ class Mus():
                 pibo = cm.tts(bhv="do_question_S", string=f"어렵지 않지? 할 수 있으면 할 수 있다고 말해줘~")
                 break
             
-            if answer[0][0] == "no" or answer[0][0] == "next":
+            if answer[0][0] == "no":
                 pibo = cm.tts(bhv="do_suggestion_S", string=f"그럼 다른 놀이 하자! {wm.word(self.user_name, 0)}가 다시 내 머리를 쓰다듬어주면 돼!")
                 self.score = [0.0, 0.0, 0.0, -0.25]
                 cwp.writerow([today, filename, self.score[0], self.score[1], self.score[2],self.score[3]])       
@@ -80,11 +80,9 @@ class Mus():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_explain_A", string=f"좋았어! 요리사는 체력 연습도 할 수 있어. 주걱 위에 풍선을 올려놓고 앉았다 일어서는 연습을 하는 거야. 준비가 되면 시작하자고 말해줘~")
                 cwc.writerow(['pibo', pibo])
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue
@@ -94,13 +92,11 @@ class Mus():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
 
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_joy_B", string=f"그래애! 시작하자")
                 time.sleep(1)
                 pibo = cm.tts(bhv="do_suggestion_S", string=f"우선 목표점과 출발선을 정해야 해. 출발할 위치에 테이프를 붙이고, 도착할 목표점에도 테이프를 붙이면 돼. 다 했으면 다 했어 라고 말해줘.")
                 cwc.writerow(['pibo', pibo])                
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue                         
@@ -111,11 +107,9 @@ class Mus():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
 
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 time.sleep(1)
                 pibo = cm.tts(bhv="do_suggestion_L", string=f"잘했어! 이젠 공을 호박이라고 생각하고 재료를 들고 출발점에서 목표점까지 움직여보자~ 다 했으면 다 했어 라고 말해줘.")
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue      
@@ -126,15 +120,13 @@ class Mus():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
 
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 audio.stop
                 time.sleep(1)
                 pibo = cm.tts(bhv="do_compliment_S", string=f"우와 정말 빠른걸? 이제 체력 연습을 해보자!")
                 time.sleep(1)
                 pibo = cm.tts(bhv="do_suggestion_L", string=f"주걱 위에 공을 올리고 앉았다 일어나는 거야. 앉을 준비가 됐으면 준비 됐어 라고 말해줘!")
                 cwc.writerow(['pibo', pibo])
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue
@@ -144,17 +136,16 @@ class Mus():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 time.sleep(1)
                 pibo = cm.tts(bhv="do_agree", string=f"좋았어! 내가 천천히 열까지 셀 동안 해보는 거야. 중간에 공을 떨어뜨리면 다시 시작해도 돼.")
+                time.sleep(1)
                 pibo = cm.tts(bhv="do_agree", string=f"몇 번 성공했는지 세었다가 알려줘. 그럼 준비이~ 시이작!")
                 time.sleep(1)
                 pibo = cm.tts(bhv="do_suggestion_S", string=f"하나, 두울, 세엣, 네엣, 다섯, 여섯, 일곱, 여덟, 아홉, 열!")
                 time.sleep(1)
                 cm.tts(bhv="do_question_L", string=f"이제 그만~ 몇 번 성공 했어?")
                 cwc.writerow(['pibo', pibo])
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue

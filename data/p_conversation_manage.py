@@ -4,7 +4,7 @@ import time
 import random
 import socket
 from threading import Thread
-from concurrent import futures
+import subprocess
 
 from konlpy.tag import Komoran
 
@@ -79,8 +79,9 @@ class ConversationManage():
         self.timeout = 10
         self.none = "None"
         self.next = "next"
-        # self.count = 0
+        self.touch_count = int
         self.user_said = ''
+        self.stt_input = ''
         self.response = ''
         self.answer = []
         self.feedback = ''   
@@ -90,34 +91,6 @@ class ConversationManage():
         self.nb = -1
         
         
-    def button(self):
-        """
-        터치 2번으로 발생시켜서 stt 탈출하는 기능
-
-        Raises:
-            Exception: stt 탈출!
-        """
-        timelimit = time.time() + 10
-        touch_count = 0
-        
-        while time.time() < timelimit:
-            data = d.send_cmd(d.code_list['SYSTEM']).split(':')[1].split('-')
-            result = data[1] if data[1] else "No signal"
-            
-            if result == "touch":
-                touch_count += 1
-                print("touch:", touch_count)
-                
-                if touch_count % 2 == 0:
-                    d.eye_on(255,245,80)
-                    self.response = self.next
-                    raise Exception("탈출") 
-            
-            else:
-                continue
-        
-        
-    
     def stt(self):
         """         
         * 정상적인 응답이 들어왔을 경우: response = speech_to_text()
@@ -132,23 +105,21 @@ class ConversationManage():
         
         # 가끔 발생하는 Google API ERROR --> ignore
         except google.api_core.exceptions.Unknown as e:
-            print(e)
+            # print(e)
             self.response = self.none
         
         except google.api_core.exceptions.InvalidArgument as e:
             print(e)
             self.response = self.none
             
-        except ValueError as e:     # timeout 시간 넘으면 그냥 retry call 안 하고 중단시킴 (google/api_core/retry.py)
-            print(e)                # Sleep generator stopped yielding sleep values.
+        except ValueError as e:     # timeout 시간 넘으면 그냥 retry call 안 하고 중단시킴 (/usr/local/lib/python3.7/dist-packages/google/api_core)
+            print(e)                # # if deline is not None~Sleep generator stopped yielding sleep values.
             self.response = self.none
-                    
-        # # 나오는 에러 싹 다 무시
-        # except Exception as e:
-        #     print(e)
-        #     self.response = self.none
-        
-        # print(self.response)
+            
+        except Exception as e:
+            print(e)
+        #     self.answer = self.next
+
         return self.response
     
     
@@ -188,16 +159,25 @@ class ConversationManage():
             o.draw_image("/home/pi/Pibo_Play/data/behavior/icon/icon_recognition1.png"); o.show()                   
             print("\n")                        
             
-            self.response = cm.stt()
+            self.stt_input = cm.stt()
+            print(self.stt_input, "\n")
+            self.response = self.stt_input[0]
+            self.touch_count = self.stt_input[1]
+            
+            
+            if self.touch_count == 2:     # touch 2번 => 다음 단계로 스킵
+                cm.tts(bhv="re_bhv", string="다음 단계로 넘어갈께~")
+                self.answer = self.next
+                break
                         
-            if self.response != self.none:
+            if self.stt_input != self.none:
                 self.user_said = self.response
                 break
             
             else:   # 무응답인 경우, 두 번 더 물어봐주고 3번째에도 무응답이면 탈출
                 count += 1
                 cm.tts(bhv=re_bhv, string=re_q)
-                   
+                
                 if count < 2:
                     continue 
                 
@@ -233,9 +213,11 @@ class ConversationManage():
                 
         if len(self.answer) == 0:
             self.answer = ["action", self.user_said]    # pos -> neg -> neu 에도 없으면 act
-        
+            
         if self.answer == self.next:
             self.answer = ['next', 'Move on..']
+        
+        
         
         print("=>", self.answer)           
                 
@@ -351,9 +333,10 @@ d = Device()
             
 
 if __name__ == "__main__":
-    answer = cm.responses_proc(re_bhv="do_stop", re_q="re_questioning")
+    print("qq")
+    answer = cm.responses_proc(re_bhv="do_stop", re_q="re_q")
     print(answer[0][0])
-
+    # cm.touch()
   
 #     # cm.responses_proc()
 

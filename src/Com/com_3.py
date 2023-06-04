@@ -35,7 +35,7 @@ crc = csv.reader(csv_conversation, delimiter=',', doublequote=True, lineterminat
 class Com():
     
     def __init__(self): 
-        self.user_name = '찬익'
+        self.user_name = '호수'
         self.score = []
         self.turns = []
         self.reject = []
@@ -58,7 +58,7 @@ class Com():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_joy_A", string=f"좋았어. 놀이 방법을 알려줄께!")
                 time.sleep(1)                
                 pibo = cm.tts(bhv="do_explain_B", string=f"화장실, 부엌, 현관에 새로운 이름을 만들어보자. 만약에 화장실 이름을 박수치는 거리로 만들면, 화장실 앞에 도착할 때 박수를 쳐야해.")
@@ -66,7 +66,7 @@ class Com():
                 pibo = cm.tts(bhv="do_question_S", string=f"할 수 있지? 할 수 있으면 할 수 있다고 말해줘~")
                 break
             
-            if answer[0][0] == "no" or answer[0][0] == "next":
+            if answer[0][0] == "no":
                 pibo = cm.tts(bhv="do_suggestion_S", string=f"그럼 다른 놀이 하자! {wm.word(self.user_name, 0)}가 다시 내 머리를 쓰다듬어주면 돼!")
                 self.score = [0.0, 0.0, 0.0, -0.25]
                 cwp.writerow([today, filename, self.score[0], self.score[1], self.score[2],self.score[3]])       
@@ -80,12 +80,10 @@ class Com():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_explain_A", string=f"거리 이름은 수영하는 거리도 될 수 있고, 등산하는 거리, 피아노 치는 거리 거리처럼 다양하게 지을 수 있어.")
                 cwc.writerow(['pibo', pibo])
                 pibo = cm.tts(bhv="do_stop", string=f"시작해볼까? 준비가 되면 시작하자고 말해줘~")
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue
@@ -95,13 +93,11 @@ class Com():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
 
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_joy_B", string=f"그래애! 시작하자")
                 time.sleep(1)
                 pibo = cm.tts(bhv="do_suggestion_L", string=f"장소 마다 이름을 정해보자~ 먼저 화장실은 무슨 거리라고 할까?")  
                 cwc.writerow(['pibo', pibo])
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue                         
@@ -124,6 +120,7 @@ class Com():
             self.reject.append(answer[1])
             
             pibo = cm.tts(bhv="do_joy_B", string=f"좋았어! 이제 종이랑 그림 도구로 장소마다 표지판을 만들어 보자.")
+            time.sleep(1)
             pibo = cm.tts(bhv="do_waiting_A", string=f"거리 이름을 그림으로 표현하거나 글씨로 써서 표지판을 완성해줘~ 세 개 모두 완성 했으면 다 했어 라고 말해줘.")
             cwc.writerow(['pibo', pibo])
         
@@ -134,12 +131,11 @@ class Com():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_compliment_S", string=f"멋진 표지판이 완성되었네.")
+                time.sleep(1)
                 pibo = cm.tts(bhv="do_waiting_B", string=f"이제 거리에 표지판을 붙이자~ 다 붙이면 다 붙였다고 말해줘")  
                 cwc.writerow(['pibo', pibo])
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue
@@ -149,7 +145,7 @@ class Com():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
 
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_question_S", string=f"좋았어. 먼저 어떤 거리로 가볼까? ")
                 answer = cm.responses_proc(re_bhv="do_question_S", re_q=f"먼저 어떤 거리로 가볼까? ")
                 cwc.writerow(['pibo', pibo])
@@ -159,8 +155,6 @@ class Com():
                 pibo = cm.tts(bhv="do_agree", string=f"그래! 파이보를 데려가 줄래? 도착하면 도착했어 라고 말해줘~")  
                 cwc.writerow(['pibo', pibo])
                 break
-            if answer[0][0] == "next":
-                break
             else:
                 continue
             
@@ -169,14 +163,12 @@ class Com():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
 
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_question_S", string=f"좋았어. 이제 거리 이름처럼 흉내 내 보자!")
                 audio.audio_play(filename="/home/pi/Pibo_Play/data/behavior/audio/sound_standing.mp3", background=True)             
                 
                 pibo = cm.tts(bhv="do_compliment_L", string=f"정말 열심히 잘 표현하는 걸? 또 어떤 거리를 가볼까?")
                 cwc.writerow(['pibo', pibo])
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue
@@ -192,7 +184,7 @@ class Com():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            if answer[0][0] == "done" or answer[0][0] == "yes":
+            if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_question_S", string=f"좋았어. 이제 거리 이름처럼 흉내 내 보자!")
                 audio.audio_play(filename="/home/pi/Pibo_Play/data/behavior/audio/sound_standing.mp3", background=True)
                 
@@ -224,8 +216,6 @@ class Com():
                 self.reject.append(answer[1])
                 
                 pibo = cm.tts(bhv="do_question_S", string=f"그렇구나~ 파이보는 {wm.word(self.user_name, 0)}랑 갔던 거리가 다 재미있었어~")
-                break
-            if answer[0][0] == "next":
                 break
             else:
                 continue             
