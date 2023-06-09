@@ -130,7 +130,7 @@ class Mus():
                 self.reject.append(answer[1])
                 
 
-                pibo = cm.tts(bhv="do_agree", string=f"그렇구나~ 정말 기대된다. 그럼 시작해보자! 다 통과했으면 다 통과했다고 말해줘. ")
+                pibo = cm.tts(bhv="do_compliment_S", string=f"그렇구나~ 정말 기대된다. 그럼 시작해보자! 다 통과했으면 다 통과했다고 말해줘. ")
                 cwc.writerow(['pibo', pibo])
                 break
             else:
@@ -141,7 +141,7 @@ class Mus():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            pibo = cm.tts(bhv="do_agree", string=f"조심조심 집중해서 통과하는 모습이 정말 멋있었어. {wm.word(self.user_name, 0)}는 뭐든 잘 할 수 있는 아이 같아!")
+            pibo = cm.tts(bhv="do_compliment_S", string=f"조심조심 집중해서 통과하는 모습이 정말 멋있었어. {wm.word(self.user_name, 0)}는 뭐든 잘 할 수 있는 아이 같아!")
             
             time.sleep(1)
             pibo = cm.tts(bhv="do_question_S", string=f"{wm.word(self.user_name, 0)}는 거미줄을 몇 번 통과했어?")
@@ -150,13 +150,13 @@ class Mus():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            pibo = cm.tts(bhv="do_agree", string=f"그렇구나. 거미줄을 통과할 때 어렵진 않았어?")
+            pibo = cm.tts(bhv="do_compliment_S", string=f"그렇구나. 거미줄을 통과할 때 어렵진 않았어?")
             answer = cm.responses_proc(re_bhv="do_question_S", re_q=f"거미줄을 통과할 때 어렵진 않았어?")
             cwc.writerow(['pibo', pibo])
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            pibo = cm.tts(bhv="do_agree", string=f"그렇구나. 파이보는 {wm.word(self.user_name, 0)}가 어려운 것도 척척 해내는 모습이 보기 좋았어~!")
+            pibo = cm.tts(bhv="do_compliment_S", string=f"그렇구나. 파이보는 {wm.word(self.user_name, 0)}가 어려운 것도 척척 해내는 모습이 보기 좋았어~!")
             break          
             
         pibo = cm.tts(bhv="do_stop", string=f"{wm.word(self.user_name, 0)}가 열심히 놀이를 했으니, 오늘은 튼튼 스탬프를 찍어줄게.")

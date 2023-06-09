@@ -152,7 +152,7 @@ class Com():
                 cwc.writerow(['user', answer[0][1], answer[1]])
                 self.reject.append(answer[1])
                 
-                pibo = cm.tts(bhv="do_agree", string=f"그래! 파이보를 데려가 줄래? 도착하면 도착했어 라고 말해줘~")  
+                pibo = cm.tts(bhv="do_compliment_S", string=f"그래! 파이보를 데려가 줄래? 도착하면 도착했어 라고 말해줘~")  
                 cwc.writerow(['pibo', pibo])
                 break
             else:
@@ -178,7 +178,7 @@ class Com():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            pibo = cm.tts(bhv="do_agree", string=f"그래! 파이보를 데려가 줄래? 도착하면 도착했어 라고 말해줘~")  
+            pibo = cm.tts(bhv="do_compliment_S", string=f"그래! 파이보를 데려가 줄래? 도착하면 도착했어 라고 말해줘~")  
             answer = cm.responses_proc(re_bhv="do_waiting_A", re_q=f"도착하면 도착했어 라고 말해줘~")            
             cwc.writerow(['pibo', pibo])
             cwc.writerow(['user', answer[0][1], answer[1]])

@@ -138,9 +138,9 @@ class Mus():
             
             if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 time.sleep(1)
-                pibo = cm.tts(bhv="do_agree", string=f"좋았어! 이제 내가 신체부위를 말하면 곡식주머니를 거기로 옮기고 균형을 잡아봐.")
+                pibo = cm.tts(bhv="do_compliment_S", string=f"좋았어! 이제 내가 신체부위를 말하면 곡식주머니를 거기로 옮기고 균형을 잡아봐.")
                 time.sleep(1)
-                pibo = cm.tts(bhv="do_agree", string=f"내가 배 하면 배에 얹고, 머리 하면 머리에 얹고 떨어뜨리지 않는 거야. 준비됐으면 준비 됐어 라고 말해줘.")
+                pibo = cm.tts(bhv="do_compliment_S", string=f"내가 배 하면 배에 얹고, 머리 하면 머리에 얹고 떨어뜨리지 않는 거야. 준비됐으면 준비 됐어 라고 말해줘.")
                 cwc.writerow(['pibo', pibo])
                 break
             else:
@@ -172,7 +172,7 @@ class Mus():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
 
-            pibo = cm.tts(bhv="do_agree", string=f"와아~ 정말 대단하다! 개미의 식량을 잘 지켜냈어. 정말 멋져~")
+            pibo = cm.tts(bhv="do_compliment_S", string=f"와아~ 정말 대단하다! 개미의 식량을 잘 지켜냈어. 정말 멋져~")
             
             time.sleep(1)
             pibo = cm.tts(bhv="do_question_S", string=f"{wm.word(self.user_name, 0)}는 오늘 곡식주머니 옮기기 하면서 어디에 올리는 게 가장 재미있었어?")
@@ -181,13 +181,13 @@ class Mus():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            pibo = cm.tts(bhv="do_agree", string=f"그렇구나. 어려운 곳도 있었어?")
+            pibo = cm.tts(bhv="do_compliment_S", string=f"그렇구나. 어려운 곳도 있었어?")
             answer = cm.responses_proc(re_bhv="do_question_S", re_q=f"어려운 곳도 있었어?")
             cwc.writerow(['pibo', pibo])
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            pibo = cm.tts(bhv="do_agree", string=f"그래도 멋지게 해냈어! {wm.word(self.user_name, 0)}가 즐겁게 참여하는 모습이 보기 좋았어~")
+            pibo = cm.tts(bhv="do_compliment_S", string=f"그래도 멋지게 해냈어! {wm.word(self.user_name, 0)}가 즐겁게 참여하는 모습이 보기 좋았어~")
             break          
             
         pibo = cm.tts(bhv="do_stop", string=f"{wm.word(self.user_name, 0)}가 열심히 놀이를 했으니, 오늘은 튼튼 스탬프를 찍어줄게.")

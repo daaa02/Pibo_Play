@@ -138,9 +138,9 @@ class Mus():
             
             if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 time.sleep(1)
-                pibo = cm.tts(bhv="do_agree", string=f"좋았어! 내가 천천히 열까지 셀 동안 해보는 거야. 중간에 공을 떨어뜨리면 다시 시작해도 돼.")
+                pibo = cm.tts(bhv="do_compliment_S", string=f"좋았어! 내가 천천히 열까지 셀 동안 해보는 거야. 중간에 공을 떨어뜨리면 다시 시작해도 돼.")
                 time.sleep(1)
-                pibo = cm.tts(bhv="do_agree", string=f"몇 번 성공했는지 세었다가 알려줘. 그럼 준비이~ 시이작!")
+                pibo = cm.tts(bhv="do_compliment_S", string=f"몇 번 성공했는지 세었다가 알려줘. 그럼 준비이~ 시이작!")
                 time.sleep(1)
                 pibo = cm.tts(bhv="do_suggestion_S", string=f"하나, 두울, 세엣, 네엣, 다섯, 여섯, 일곱, 여덟, 아홉, 열!")
                 time.sleep(1)
@@ -166,7 +166,7 @@ class Mus():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            pibo = cm.tts(bhv="do_agree", string=f"그렇구나. 오늘 놀이에서 어려운 게 있었어?")
+            pibo = cm.tts(bhv="do_compliment_S", string=f"그렇구나. 오늘 놀이에서 어려운 게 있었어?")
             answer = cm.responses_proc(re_bhv="do_question_S", re_q=f"오늘 놀이에서 어려운 게 있었어?")
             cwc.writerow(['pibo', pibo])
             cwc.writerow(['user', answer[0][1], answer[1]])
@@ -178,7 +178,7 @@ class Mus():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            pibo = cm.tts(bhv="do_agree", string=f"우와아~ 그래도 멋지게 해냈구나. {wm.word(self.user_name, 0)}가 힘들어도 끝까지 하는 모습이 보기 좋았어~")
+            pibo = cm.tts(bhv="do_compliment_S", string=f"우와아~ 그래도 멋지게 해냈구나. {wm.word(self.user_name, 0)}가 힘들어도 끝까지 하는 모습이 보기 좋았어~")
             break          
             
         pibo = cm.tts(bhv="do_stop", string=f"{wm.word(self.user_name, 0)}가 열심히 놀이를 했으니, 오늘은 튼튼 스탬프를 찍어줄게.")

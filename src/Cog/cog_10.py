@@ -145,7 +145,7 @@ class Cog():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            pibo = cm.tts(bhv="do_agree", string=f"그렇구나. 파이보는 징검다리를 보면 혹시나 물에 빠질까봐 마음이 조마조마해.")
+            pibo = cm.tts(bhv="do_compliment_S", string=f"그렇구나. 파이보는 징검다리를 보면 혹시나 물에 빠질까봐 마음이 조마조마해.")
             
             time.sleep(1)
             pibo = cm.tts(bhv="do_question_L", string=f"{wm.word(self.user_name, 0)}는 오늘 징검다리 건너는 게 어렵진 않았어?")

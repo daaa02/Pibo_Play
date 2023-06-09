@@ -138,7 +138,7 @@ class Mus():
             self.reject.append(answer[1])
 
             time.sleep(1)
-            pibo = cm.tts(bhv="do_agree", string=f"그렇구나~ 정말 기대된다. 그럼 시작해보자! 다 했으면 다 했다고 말해줘~")
+            pibo = cm.tts(bhv="do_compliment_S", string=f"그렇구나~ 정말 기대된다. 그럼 시작해보자! 다 했으면 다 했다고 말해줘~")
             cwc.writerow(['pibo', pibo])
             break
         
@@ -162,7 +162,7 @@ class Mus():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            pibo = cm.tts(bhv="do_agree", string=f"그렇구나. 파이보는 탑을 높게 높게 쌓아서 신기했어.")
+            pibo = cm.tts(bhv="do_compliment_S", string=f"그렇구나. 파이보는 탑을 높게 높게 쌓아서 신기했어.")
             time.sleep(1)
             
             pibo = cm.tts(bhv="do_question_S", string=f"{wm.word(self.user_name, 0)}는 뭐가 가장 기억에 남아?")
@@ -171,7 +171,7 @@ class Mus():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            pibo = cm.tts(bhv="do_agree", string=f"알려줘서 고마워. {wm.word(self.user_name, 0)}랑 노는 건 항상 너무 재밌어~")
+            pibo = cm.tts(bhv="do_compliment_S", string=f"알려줘서 고마워. {wm.word(self.user_name, 0)}랑 노는 건 항상 너무 재밌어~")
             break          
             
         pibo = cm.tts(bhv="do_stop", string=f"{wm.word(self.user_name, 0)}가 열심히 놀이를 했으니, 오늘은 튼튼 스탬프를 찍어줄게.")

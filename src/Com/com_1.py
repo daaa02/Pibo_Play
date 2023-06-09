@@ -173,7 +173,7 @@ class Com():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
 
-            pibo = cm.tts(bhv="do_agree", string=f"그랬구나. 파이보도 참 잘 그렸다고 생각했어.")
+            pibo = cm.tts(bhv="do_compliment_S", string=f"그랬구나. 파이보도 참 잘 그렸다고 생각했어.")
             break                   
             
         while True:          
@@ -190,7 +190,7 @@ class Com():
                 cwc.writerow(['user', answer[0][1], answer[1]])
                 self.reject.append(answer[1])
 
-                pibo = cm.tts(bhv="do_agree", string=f"그렇구나. {wm.word(self.user_name, 0)}는 동물을 정말 정성껏 잘 돌봐줄 것 같아.")                    
+                pibo = cm.tts(bhv="do_compliment_S", string=f"그렇구나. {wm.word(self.user_name, 0)}는 동물을 정말 정성껏 잘 돌봐줄 것 같아.")                    
                 break
             
         pibo = cm.tts(bhv="do_stop", string=f"{wm.word(self.user_name, 0)}가 열심히 놀이를 했으니, 오늘은 술술 스탬프를 찍어줄게.")

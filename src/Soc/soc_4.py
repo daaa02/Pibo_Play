@@ -159,7 +159,7 @@ class Soc():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            pibo = cm.tts(bhv="do_agree", string=f"그럴 수 있겠구나. 파이보는 빨리 움직일 수 있는 {wm.word(self.user_name, 0)}가 너무 부러워~")
+            pibo = cm.tts(bhv="do_compliment_S", string=f"그럴 수 있겠구나. 파이보는 빨리 움직일 수 있는 {wm.word(self.user_name, 0)}가 너무 부러워~")
             break
             
             
