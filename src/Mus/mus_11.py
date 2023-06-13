@@ -8,6 +8,7 @@ import csv
 import random
 from datetime import datetime
 import time
+import json
 
 # sys.path.append('/home/kiro/workspace/Conversation_Scenarios/')
 
@@ -35,7 +36,9 @@ crc = csv.reader(csv_conversation, delimiter=',', doublequote=True, lineterminat
 class Mus():
     
     def __init__(self): 
-        self.user_name = '호수'
+        with open('/home/pi/name_config.json', 'r') as f:
+            config = json.load(f)        
+            self.user_name = config['user_name'] 
         self.score = []
         self.turns = []
         self.reject = []
