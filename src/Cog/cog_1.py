@@ -36,6 +36,7 @@ class Cog():
         with open('/home/pi/name_config.json', 'r') as f:
             config = json.load(f)        
             self.user_name = config['user_name'] 
+        self.aa = ''
         self.score = []
         self.turns = []
         self.reject = []
@@ -175,21 +176,20 @@ class Cog():
         if len(answer[0][1]) != 0:
             for i in range(len(self.Negative)):
                 if self.Negative[i] in answer[0][1]:
-                    aa = 'negative'          
+                    self.aa = 'negative'          
             for j in range(len(self.Positive)):
                 if self.Positive[j] in answer[0][1]:
-                    aa = 'positive'                
-            if len(aa) == 0: 
-                aa = 'else'
-            print(aa)
+                    self.aa = 'positive'                
+            if len(self.aa) == 0: 
+                self.aa = 'else'
               
-        if aa == "negative":
+        if self.aa == "negative":
             self.score = [0.0, 0.0, -0.5, 0.0]
         
-        if aa == "positive":
+        if self.aa == "positive":
             self.score = [0.0, 0.0, 0.5, 0.0]
             
-        if aa != "negative" and aa != "positive": # if answer[0][0] == "neutral":
+        if self.aa != "negative" and self.aa != "positive": # if answer[0][0] == "neutral":
             self.score = [0.0, 0.0, -0.25, 0.0]
         
         cwp.writerow([today, filename, self.score[0], self.score[1], self.score[2],self.score[3]])

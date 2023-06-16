@@ -39,6 +39,7 @@ class Com():
         with open('/home/pi/name_config.json', 'r') as f:
             config = json.load(f)        
             self.user_name = config['user_name'] 
+        self.aa = ''
         self.score = []
         self.turns = []
         self.reject = []
@@ -212,24 +213,24 @@ class Com():
         # 종료 인사
         pibo = cm.tts(bhv="do_joy_A", string=f"나랑 놀아줘서 고마워~ 그럼 우리 나중에 또 놀자!")
         
-        if len(answer) != 0:
+        if len(answer[0][1]) != 0:
             for i in range(len(self.Negative)):
-                if self.Negative[i] in answer:
-                    aa = 'negative'          
+                if self.Negative[i] in answer[0][1]:
+                    self.aa = 'negative'          
             for j in range(len(self.Positive)):
-                if self.Positive[j] in answer:
-                    aa = 'positive'                
-            if len(aa) == 0: 
-                aa = 'else'
+                if self.Positive[j] in answer[0][1]:
+                    self.aa = 'positive'                
+            if len(self.aa) == 0: 
+                self.aa = 'else'
             print(aa)
               
-        if aa == "negative":
+        if self.aa == "negative":
             self.score = [-0.5, 0.0, 0.0, 0.0]
         
-        if aa == "positive":
+        if self.aa == "positive":
             self.score = [0.5, 0.0, 0.0, 0.0]
             
-        if aa != "negative" and aa != "positive": # if answer[0][0] == "neutral":
+        if self.aa != "negative" and self.aa != "positive": # if answer[0][0] == "neutral":
             self.score = [-0.25, 0.0, 0.0, 0.0]
         
         cwp.writerow([today, filename, self.score[0], self.score[1], self.score[2],self.score[3]])

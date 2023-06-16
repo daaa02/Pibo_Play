@@ -29,13 +29,13 @@ class Test:
         pibo = cm.tts(bhv='do_question_S', string="활동 어땠어? 재밌었는지, 별로였는지 얘기해줄래?")
         answer = cm.responses_proc()  
               
-        if aa == "negative":
+        if self.aa == "negative":
             self.score = [0.0, -0.5, 0.0, 0.0]
         
-        if aa == "positive":
+        if self.aa == "positive":
             self.score = [0.0, 0.5, 0.0, 0.0]
             
-        if aa != "negative" and aa != "positive": # if answer[0][0] == "neutral":
+        if self.aa != "negative" and self.aa != "positive": # if answer[0][0] == "neutral":
             self.score = [0.0, -0.25, 0.0, 0.0]
         
         cwp.writerow([today, filename, self.score[0], self.score[1], self.score[2],self.score[3]])
