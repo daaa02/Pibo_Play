@@ -11,7 +11,7 @@ scope = {
 json_file='/home/pi/dayoung-123-1e6969392f38.json'
 credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file, scope)
 gc = gspread.authorize(credentials)
-url = "https://docs.google.com/spreadsheets/d/1z_-_YYSvvlC2SEpLDRFKpz-zym9AZGBj65A_sOExgSo/edit?usp=sharing"
+url = "https://docs.google.com/spreadsheets/d/1mtetNRxVyOGZB9y1FL1OM1x3Ob7APSPXWiPkjqx_eTs/edit#gid=353058849"
 
 today = datetime.now().strftime('%Y-%m-%d %H:%M')
 with open('/home/pi/name_config.json', 'r') as f:
@@ -35,8 +35,8 @@ class google_spread_sheet():
         
         # 만들어졌던 시트에 쓰기
         os = gc.open_by_url(url)
-        #worksheet = os.get_worksheet(0)
-        worksheet = os.worksheet("활동상황")
+        # worksheet = os.get_worksheet(5)
+        worksheet = os.worksheet('활동상황')
         
         str_list = list(filter(None, worksheet.col_values(1)))
         next = len(str_list)+1

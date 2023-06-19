@@ -172,7 +172,7 @@ class Cog():
                 continue
         
             
-        pibo = cm.tts(bhv="do_stop", string=f"{wm.word(self.user_name, 0)}가 열심히 놀이를 했으니, 오늘은 똑똑 스탬프를 찍어줄게.")
+        pibo = cm.tts(bhv="do_stop", string=f"{wm.word(self.user_name, 0)}가 열심히 놀이를 했으니, 오늘은 똑똑 스탬프를 찍어줄께.")
         behavior.do_stamp()
         time.sleep(1)
         
@@ -197,7 +197,7 @@ class Cog():
                     self.aa = 'positive'                
             if len(self.aa) == 0: 
                 self.aa = 'else'
-            print(aa)
+            
               
         if self.aa == "negative":
             self.score = [0.0, 0.0, -0.5, 0.0]

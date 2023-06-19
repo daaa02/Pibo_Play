@@ -199,7 +199,7 @@ class Com():
                 pibo = cm.tts(bhv="do_compliment_S", string=f"그렇구나. {wm.word(self.user_name, 0)}는 동물을 정말 정성껏 잘 돌봐줄 것 같아.")                    
                 break
             
-        pibo = cm.tts(bhv="do_stop", string=f"{wm.word(self.user_name, 0)}가 열심히 놀이를 했으니, 오늘은 술술 스탬프를 찍어줄게.")
+        pibo = cm.tts(bhv="do_stop", string=f"{wm.word(self.user_name, 0)}가 열심히 놀이를 했으니, 오늘은 술술 스탬프를 찍어줄께.")
         behavior.do_stamp()
         time.sleep(1)
         
@@ -224,7 +224,7 @@ class Com():
                     self.aa = 'positive'                
             if len(self.aa) == 0: 
                 self.aa = 'else'
-            print(aa)
+            
               
         if self.aa == "negative":
             self.score = [-0.5, 0.0, 0.0, 0.0]

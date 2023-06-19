@@ -173,7 +173,7 @@ class Mus():
             pibo = cm.tts(bhv="do_question_S", string=f"그랬구나. 이야기 들려줘서 고마워.")
             break          
             
-        pibo = cm.tts(bhv="do_stop", string=f"{wm.word(self.user_name, 0)}가 열심히 놀이를 했으니, 오늘은 튼튼 스탬프를 찍어줄게.")
+        pibo = cm.tts(bhv="do_stop", string=f"{wm.word(self.user_name, 0)}가 열심히 놀이를 했으니, 오늘은 튼튼 스탬프를 찍어줄께.")
         behavior.do_stamp()
         time.sleep(1)
         
