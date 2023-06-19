@@ -17,11 +17,13 @@ from data.p_conversation_manage import ConversationManage, WordManage, NLP
 from data.speech_to_text import speech_to_text
 from data.text_to_speech import TextToSpeech, text_to_speech
 import data.behavior.behavior_list as behavior
+from data.spread import google_spread_sheet
 
 cm = ConversationManage()
 wm = WordManage()
 nlp = NLP()
 audio = TextToSpeech()
+gss = google_spread_sheet()
 
 folder = "/home/pi/UserData"
 filename = os.path.basename(__file__).strip('.py')
