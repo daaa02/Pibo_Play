@@ -35,7 +35,8 @@ class google_spread_sheet():
         
         # 만들어졌던 시트에 쓰기
         os = gc.open_by_url(url)
-        worksheet = os.get_worksheet(0)
+        #worksheet = os.get_worksheet(0)
+        worksheet = os.worksheet("활동상황")
         
         str_list = list(filter(None, worksheet.col_values(1)))
         next = len(str_list)+1
