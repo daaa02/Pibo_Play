@@ -155,8 +155,10 @@ class ConversationManage():
         self.answer = []    # 마지막 answer가 'action'일 경우 초기화 안 되는 것 같아서  
         count = 0
         while True:
-            audio.audio_play("/home/pi/trigger.wav", 'local', '-1800', False)     
-            o.draw_image("/home/pi/Pibo_Play/data/behavior/icon/icon_recognition1.png"); o.show()                   
+            audio.audio_play("/home/pi/trigger.wav", 'local', '-1800', False)
+            o.set_font(size=25)
+            o.draw_text((15,20), "듣는 중..."); o.show()
+            # o.draw_image("/home/pi/Pibo_Play/data/behavior/icon/icon_recognition1.png"); o.show()            
             print("\n")                        
             
             self.stt_input = cm.stt()
