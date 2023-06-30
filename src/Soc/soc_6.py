@@ -54,7 +54,7 @@ class Soc():
         
     def soc_6(self):
         
-        pibo = cm.tts(bhv="do_suggestion_S", string=f"털실 놀이를 해보자!")
+        pibo = cm.tts(bhv="do_suggestion_S", string=f"신체 악기 놀이를 해보자!")
         
         time.sleep(1)
         pibo = cm.tts(bhv="do_explain_A", string=f"이번 놀이는 준비물이 필요없어. 놀이 방법을 알려줄께!") 
