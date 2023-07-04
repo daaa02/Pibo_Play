@@ -42,7 +42,10 @@ class Test:
             self.score = [0.0, -0.25, 0.0, 0.0]
         
         cwp.writerow([today, filename, self.score[0], self.score[1], self.score[2],self.score[3]])
-        
+
+        # 종료 인사
+        pibo = cm.tts(bhv="do_joy_A", string=f"나랑 놀아줘서 고마워~")
+
         # 4. Paradise framework 기록
         turns = sum((self.reject[i] + 1) * 2 for i in range(len(self.reject)))  
         reject = sum(self.reject) 
