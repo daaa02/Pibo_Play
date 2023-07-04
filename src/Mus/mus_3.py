@@ -190,8 +190,8 @@ class Mus():
         
         # 3. 피드백 수집
         time.sleep(1)                   
-        pibo = cm.tts(bhv='do_question_S', string="활동 어땠어? 재밌었는지, 별로였는지 얘기해줄래?")
-        answer = cm.responses_proc(re_bhv="do_question_S", re_q=f"활동 어땠어?")
+        pibo = cm.tts(bhv='do_question_S', string="파이보랑 노는 거 재미있었어? 재밌었는지, 별로였는지 얘기해줄래?")
+        answer = cm.responses_proc(re_bhv="do_question_S", re_q=f"파이보랑 노는 거 재미있었어?")
         
         # 종료 인사
         pibo = cm.tts(bhv="do_joy_A", string=f"나랑 놀아줘서 고마워~ 그럼 우리 나중에 또 놀자!")
@@ -207,12 +207,15 @@ class Mus():
                 self.aa = 'else'
               
         if self.aa == "negative":
+            cm.tts(bhv="do_joy_A", string=f"파이보는 {wm.word(self.user_name, 0)}랑 놀아서 재미있었어!")
             self.score = [0.0, 0.0, 0.0, -0.5]
         
         if self.aa == "positive":
+            cm.tts(bhv="do_joy_A", string=f"나도야! 다음에 또 재미있는 놀이 알려줄게.")
             self.score = [0.0, 0.0, 0.0, 0.5]
             
         if self.aa != "negative" and self.aa != "positive": # if answer[0][0] == "neutral":
+            cm.tts(bhv="do_joy_A", string=f"{wm.word(self.user_name, 0)}랑 노는 건 정말 재미있어.")
             self.score = [0.0, 0.0, 0.0, -0.25]
         
         cwp.writerow([today, filename, self.score[0], self.score[1], self.score[2],self.score[3]])
