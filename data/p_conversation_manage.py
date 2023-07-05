@@ -80,7 +80,7 @@ class ConversationManage():
         self.timeout = 10
         self.none = "None"
         self.next = "next"
-        self.touch_count = int
+        self.touch_count = 0
         self.user_said = ''
         self.stt_input = ''
         self.response = ''
@@ -119,7 +119,7 @@ class ConversationManage():
             
         except Exception as e:
             print(e)
-        #     self.answer = self.next
+            self.response = self.none
 
         return self.response
     
