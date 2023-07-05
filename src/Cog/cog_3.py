@@ -144,7 +144,9 @@ class Cog():
                 pibo = cm.tts(bhv="do_question_L", string=f"잘했어~ 정말 멋지다!")
                 
                 time.sleep(1)
-                pibo = cm.tts(bhv="do_question_L", string=f"이제 자리에 누워 몸 위에 종이컵을 올려놓자. 많이 올릴 수록 좋아~ 다 올렸으면 다 올렸다고 말해줘!")
+                pibo = cm.tts(bhv="do_question_L", string=f"이제 자리에 누워 몸 위에 종이컵을 올려놓자. 많이 올릴 수록 좋아~") 
+                time.sleep(5)
+                pibo = cm.tts(bhv="do_waiting_B", string=f"다 올렸으면 다 올렸다고 말해줘!")
                 break
             else:
                 continue

@@ -66,5 +66,32 @@ def e_sad():
     device.eye_on(152,66,186)
 
 
+def e_listen():
+    device.send_raw('#21:000,255,204,2')
+    time.sleep(0.1)
+    device.send_raw('#21:255,255,255,2')
+    time.sleep(0.1)
+    device.send_raw('#21:000,255,204,2')
+    time.sleep(0.1)
+    device.send_raw('#21:255,255,255,2')
+    time.sleep(0.1)
+    device.send_raw('#21:000,255,204,2')
+    time.sleep(0.1)
+    device.send_raw('#21:255,255,255,2')
+    time.sleep(0.1)
+    device.send_raw('#21:000,255,204,2')
+    time.sleep(0.1)
+    device.send_raw('#21:255,255,255,2')
+    time.sleep(0.1)
+    device.send_raw('#21:255,255,255,2')
+    time.sleep(0.1)
+    device.send_raw('#21:255,255,255,2')
+    time.sleep(0.1)
+    device.send_raw('#21:255,255,255,2')
+    time.sleep(0.1)
+    device.send_raw('#21:255,255,255,2')
+    time.sleep(0.1)
+
+
 if __name__ == "__main__":
     e_compliment()

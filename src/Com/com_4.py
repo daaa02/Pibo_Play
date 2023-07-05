@@ -56,7 +56,7 @@ class Com():
         pibo = cm.tts(bhv="do_suggestion_S", string=f"춤추는 유령 놀이를 해보자!")
         time.sleep(1)        
         pibo = cm.tts(bhv="do_explain_A", string=f"이번 놀이는 준비물이 필요없어! 놀이 방법을 알려줄께!")
-        time.sleep(1)
+        time.sleep(1) 
         pibo = cm.tts(bhv="do_suggestion_S", string=f"음악이 나오면 주문을 외치고 마음껏 춤을 추면 돼. 주문을 따라해보자!")
         time.sleep(1)
         pibo = cm.tts(bhv="do_joy_A", string=f"‘우리는 춤을 추는 유령이에요’. 한번 따라해 보자!")

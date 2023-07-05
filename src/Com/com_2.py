@@ -126,8 +126,9 @@ class Com():
                 pibo = cm.tts(bhv="do_question_S", string=f"{wm.word(self.user_name, 0)}는 지금 무엇을 하고 있어?")
                 cwc.writerow(['pibo', pibo])
                 break
+            
             if len(self.animal) == 0 and len(answer[0][1]) != 0:
-                self.animal == "그 동물"
+                self.animal = "그 동물"
                 pibo = cm.tts(bhv="do_joy_B", string=f"좋았어! {wm.word(self.user_name, 0)}가 좋아하는 동물로 변해라, 얍!")
                 audio.audio_play(filename="/home/pi/Pibo_Play/data/behavior/audio/sound_magician.wav")
                 pibo = cm.tts(bhv="do_joy_A", string=f"정말 실감나는 걸? 또 주문을 걸게~ 그대로 멈춰라, 얍!")
