@@ -118,8 +118,10 @@ class Com():
             if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_joy_B", string=f"우와아~! 정말 멋진 걸?")
                 time.sleep(1)                
-                pibo = cm.tts(bhv="do_suggestion_L", string=f"다른 동물들도 더 그려보자. 시간을 5분 줄게 자유롭게 그려봐. 다 그렸으면 다 그렸다고 말해줘~")
+                pibo = cm.tts(bhv="do_suggestion_L", string=f"다른 동물들도 더 그려보자. 시간을 줄게 자유롭게 그려봐. 다 그렸으면 다 그렸다고 말해줘~")
                 cwc.writerow(['pibo', pibo])
+                time.sleep(120)
+                pibo = cm.tts(bhv="do_suggestion_L", string=f"다 그렸으면 다 그렸다고 말해줘~")                
                 break
             else:
                 continue

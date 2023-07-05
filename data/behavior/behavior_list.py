@@ -218,7 +218,15 @@ def do_sad():
         audio.audio_play(filename="/home/pi/Pibo_Conversation/data/behavior/audio/sound_sad.wav", out='local', volume=-1500, background=True)
         motion.set_motion(name="m_sad", cycle=1)
         break
-    
+
+
+def do_dance():
+    eye.e_joy()
+    t = Thread(target=oled.o_joy, args=(), daemon=True)
+    t.start()    
+    while True:
+        motion.set_motion(name="dance1", cycle=1)
+        break    
 
 
 def execute(bhv):
@@ -262,6 +270,8 @@ def execute(bhv):
         do_joy_B()
     if bhv == "do_sad":
         do_sad()
+    if bhv == "do_dance":
+        do_dance()
     
 
     

@@ -114,10 +114,10 @@ class Com():
             cwc.writerow(['user', answer[0][1], answer[1]])
             self.reject.append(answer[1])
             
-            self.animal = NLP.animal(answer[0][1])
+            self.animal = nlp.animal(answer[0][1])
             
             if len(self.animal) != 0:
-                pibo = cm.tts(bhv="do_joy_B", string=f"좋았어! {self.animal}으로 변해라, 얍!")
+                pibo = cm.tts(bhv="do_joy_B", string=f"좋았어! {wm.word(self.animal, 0)}로 변해라, 얍!")
                 audio.audio_play(filename="/home/pi/Pibo_Play/data/behavior/audio/sound_magician.wav")
                 pibo = cm.tts(bhv="do_joy_A", string=f"정말 실감나는 걸? 또 주문을 걸게~ 그대로 멈춰라, 얍!")
                 audio.audio_play(filename="/home/pi/Pibo_Play/data/behavior/audio/sound_magician.wav")
