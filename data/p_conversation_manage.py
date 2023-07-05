@@ -168,7 +168,6 @@ class ConversationManage():
                 self.stt_input = cm.stt()
                 break
             
-            print(self.stt_input, "\n")
             self.response = self.stt_input[0]
             self.touch_count = self.stt_input[1]
             
