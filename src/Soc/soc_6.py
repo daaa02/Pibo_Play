@@ -119,7 +119,7 @@ class Soc():
             pibo = cm.tts(bhv="do_joy_A", string=f"그런 소리가 났구나. 정말 신기하다~!")
             
             time.sleep(1)
-            pibo = cm.tts(bhv="do_question_L", string=f"소리가 잘 안나는 신체부위도 있었어?")
+            pibo = cm.tts(bhv="do_question_S", string=f"소리가 잘 안나는 신체부위도 있었어?")
             answer = cm.responses_proc(re_bhv="do_question_S", re_q=f"소리가 잘 안나는 신체부위도 있었어?")
             cwc.writerow(['pibo', pibo])
             cwc.writerow(['user', answer[0][1], answer[1]])
