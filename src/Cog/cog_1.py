@@ -24,7 +24,7 @@ gss = google_spread_sheet()
 
 folder = "/home/pi/UserData"
 filename = os.path.basename(__file__).strip('.py')
-today_start = datetime.now().strftime('%y%m%d_%H%M')
+today_start = datetime.now().strftime('%m%d_%H%M')
 csv_conversation = open(f'{folder}/{today_start}_{filename}.csv', 'a', newline='', encoding = 'utf-8')
 csv_preference = open(f'{folder}/aa.csv', 'a', newline='', encoding = 'utf-8')
 cwc = csv.writer(csv_conversation)
@@ -49,7 +49,7 @@ class Cog():
 
     
     def cog_1(self):
-        gss.write_sheet(name=self.user_name, today=today_start, activities=filename)
+        gss.write_sheet(name=self.user_name, today=f'start_{today_start}', activities=filename)
         
         pibo = cm.tts(bhv="do_suggestion_S", string=f"휴지길 놀이를 해보자!")
         time.sleep(1)
@@ -214,8 +214,8 @@ class Cog():
         cwc.writerow(['%Misrecognitions', ])
 
         # 5. 활동 완료 기록
-        today_end = datetime.now().strftime('%y%m%d_%H%M')        
-        gss.write_sheet(name=self.user_name, today=today_end, activities=filename)
+        today_end = datetime.now().strftime('%m%d_%H%M')        
+        gss.write_sheet(name=self.user_name, today=f'end_{today_end}', activities=filename)
         
         
         

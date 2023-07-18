@@ -67,7 +67,7 @@ def e_sad():
 
 
 def e_listen():
-    device.eye_on(000,255,204)
+    device.eye_on(0,255,0)
     # time.sleep(0.1)
     # device.send_raw('#21:255,255,255,2')
     # time.sleep(0.1)
