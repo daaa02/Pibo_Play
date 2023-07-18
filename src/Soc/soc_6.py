@@ -53,7 +53,7 @@ class Soc():
                 
         
     def soc_6(self):
-        gss.write_sheet(name=self.user_name, today=today_start, activities=filename)
+        # gss.write_sheet(name=self.user_name, today=today_start, activities=filename)
         pibo = cm.tts(bhv="do_suggestion_S", string=f"신체 악기 놀이를 해보자!")
         
         time.sleep(1)
