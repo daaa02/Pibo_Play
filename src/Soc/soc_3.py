@@ -58,7 +58,7 @@ class Soc():
         time.sleep(1)
         pibo = cm.tts(bhv="do_explain_A", string=f"이번 놀이는 신문지가 필요해!") 
         time.sleep(1)
-        pibo = cm.tts(bhv="do_waiting_A", string=f"신문지가 없으면 큰 종이도 좋아. 준비가 되면 준비 됐어 라고 말해줘~")
+        pibo = cm.tts(bhv="do_waiting_A", string=f"신문지가 없으면 커다란 종이나 담요도 좋아. 준비가 되면 준비 됐어 라고 말해줘~")
         cwc.writerow(['pibo', pibo])        
         
         while True:
@@ -134,7 +134,7 @@ class Soc():
 
             if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_compliment_S", string=f"신문지 땅이 좁아졌구나! 다시 시작해보자!")
-                pibo = cm.tts(bhv="do_suggestion_L", string=f"노래가 다시 시작되면 먼저 바닥에 신문지를 깔고 신문지 위에 올라가서 마음껏 춤춰보자!")            
+                # pibo = cm.tts(bhv="do_suggestion_L", string=f"노래가 다시 시작되면 먼저 바닥에 신문지를 깔고 신문지 위에 올라가서 마음껏 춤춰보자!")            
                 
                 audio.audio_play(filename="/home/pi/Pibo_Play/data/behavior/audio/sound_dancing.mp3", volume=-1800)
                 pibo = cm.tts(bhv="do_stop", string=f"노래가 끝났어. 신문지 땅 밖으로 나와도 좋아~")
@@ -152,7 +152,7 @@ class Soc():
 
             if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_compliment_S", string=f"신문지 땅이 좁아졌구나! 다시 시작해보자!")
-                pibo = cm.tts(bhv="do_suggestion_L", string=f"노래가 다시 시작되면 먼저 바닥에 신문지를 깔고 신문지 위에 올라가서 마음껏 춤춰보자!")            
+                # pibo = cm.tts(bhv="do_suggestion_L", string=f"노래가 다시 시작되면 먼저 바닥에 신문지를 깔고 신문지 위에 올라가서 마음껏 춤춰보자!")            
                 
                 audio.audio_play(filename="/home/pi/Pibo_Play/data/behavior/audio/sound_dancing.mp3", volume=-1800)
                 pibo = cm.tts(bhv="do_stop", string=f"노래가 끝났어. 신문지 땅 밖으로 나와도 좋아~")
@@ -170,7 +170,7 @@ class Soc():
 
             if answer[0][0] == "done" or answer[0][0] == "yes" or answer[0][0] == "next":
                 pibo = cm.tts(bhv="do_compliment_S", string=f"신문지 땅이 좁아졌구나! 다시 시작해보자!")
-                pibo = cm.tts(bhv="do_suggestion_L", string=f"노래가 다시 시작되면 먼저 바닥에 신문지를 깔고 신문지 위에 올라가서 마음껏 춤춰보자!")            
+                # pibo = cm.tts(bhv="do_suggestion_L", string=f"노래가 다시 시작되면 먼저 바닥에 신문지를 깔고 신문지 위에 올라가서 마음껏 춤춰보자!")            
                 
                 audio.audio_play(filename="/home/pi/Pibo_Play/data/behavior/audio/sound_dancing.mp3", volume=-1800)
                 pibo = cm.tts(bhv="do_stop", string=f"노래가 끝났어. 신문지 땅 밖으로 나와도 좋아~")

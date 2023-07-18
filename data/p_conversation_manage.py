@@ -171,11 +171,11 @@ class ConversationManage():
             self.response = self.stt_input[0]
             self.touch_count = self.stt_input[1]
             
-            
-            if self.touch_count == 2:     # touch 2번 => 다음 단계로 스킵
-                cm.tts(bhv="re_bhv", string="다음 단계로 넘어갈께~")
-                self.answer = self.next
-                break
+            # # 터치 오인식으로 음성인식 안 되고 넘어가는 경우 있는 것 같음. => 임시로 삭제함 (230718)
+            # if self.touch_count == 2:     # touch 2번 => 다음 단계로 스킵
+            #     # cm.tts(bhv="re_bhv", string="다음 단계로 넘어갈께~")  
+            #     self.answer = self.next
+            #     break
                         
             if self.stt_input != self.none:
                 self.user_said = self.response
